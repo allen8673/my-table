@@ -1,12 +1,17 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import './myTable.css'
 
-export const MyTable: React.FC<any> = (props) => {
-    const { columns, data }: { columns: any[], data: any[] } = props;
+interface IMyTable {
+    columns: any[],
+    data: any[],
+    search:string,
+}
+
+export const MyTable: React.FC<IMyTable> = (props) => {
+    const { columns, data, search } = props;
     const [displayData, setDisplayData] = useState<any[]>(data);
     const [filters, setFilters] = useState<{ [key: string]: string }>({});
     const [sort, setSort] = useState<{ key: string, sort: number }>({ key: '', sort: 0 });
-    const [search, setSearch] = useState<string>('');
 
     useEffect(() => {
         let _data = [...data];
@@ -25,11 +30,6 @@ export const MyTable: React.FC<any> = (props) => {
         setDisplayData(_data)
     }, [search, filters, sort])
 
-    const inputChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
-        const { target: { value } = {} } = e;
-        setSearch(value as string);
-    }
-
     const columnSort = (item:any) => {
         setSort({
             key: item.index,
@@ -38,10 +38,7 @@ export const MyTable: React.FC<any> = (props) => {
     }
 
     return (
-        <Fragment>
-            <div className='search'>
-                <input onChange={inputChange} placeholder='Please type search keyword'/>
-            </div>
+       
             <div className='my-table'>
                 <table>
                     <thead>
@@ -77,6 +74,5 @@ export const MyTable: React.FC<any> = (props) => {
                 </table>
             </div>
 
-        </Fragment>
     )
 }

@@ -1,0 +1,24 @@
+* {
+    outline: none;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 50px
+}
+
+input {
+    border-radius: 10px;
+    padding: 10px 15px;
+    width: 60%;
+    font-size: 30px;
+    border: none;
+    outline: none;
+    box-shadow: 0 10px 25px 0 rgb(200, 200, 200);
+}
+
+input::placeholder {
+    color: #66656528
+}

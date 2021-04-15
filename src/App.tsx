@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {MyTable} from './myTable';
+import { MySearchBar } from './components/mySearchBar';
+import { MyTable } from './components/myTable';
 
-function App() {
+export const App: React.FC<any> = ()=> {
 
+  const [search, setSearch] = useState<string>('');
   const columns: any[] = [
     {
       title: 'First Name',
@@ -29,7 +31,6 @@ function App() {
       index: 'phone',
     },
   ];
-
   const data: any[] = [    
     {
       first_name: 'Andy',
@@ -58,10 +59,11 @@ function App() {
   ]
   
   return (
-    <div className="App">      
-      <MyTable columns={columns} data={data}/>
+    <div className="App">   
+      <MySearchBar setSearch={ (val)=>{setSearch(val)} } />
+      <MyTable columns={columns} data={data} search={search}/>
     </div>
   );
 }
 
-export default App;
+// export default App;
